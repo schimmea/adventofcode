@@ -1,4 +1,7 @@
+from itertools import chain
 from typing import List
+
+import numpy as np
 
 
 class load_input:
@@ -25,13 +28,13 @@ class load_input:
         return inp
     
     @classmethod
-    def day_5_format(cls) -> List[List[List[int]]]:
+    def day_5_format(cls) -> np.ndarray:
         inp = []
         with open("input.txt") as file:
             while line := file.readline().rstrip():
-                line = [[int(num) for num in x.split(",")] for x in line.split(" -> ")]
-                inp.append(line)
-        return inp
+                line_lists = [coords.split(",") for coords in line.split(" -> ")]
+                inp.append([*line_lists[0], *line_lists[1]])
+        return np.array(inp, dtype=int)
     
     @classmethod
     def one_line_int_list(cls) -> List[int]:

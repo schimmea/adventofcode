@@ -4,12 +4,11 @@ from load_input_utils import load_input
 import numpy as np
 
 
-def get_overlaps(inp: List[List[List[int]]]) -> None:
-    max_ix = np.array(inp).max() + 1
+def get_overlaps(inp: np.ndarray) -> None:
+    max_ix = np.max(inp) + 1
     field_map = np.zeros((max_ix, max_ix), dtype=int)
     for vent in inp:
-        x1, y1 = vent[0][0], vent[0][1]
-        x2, y2 = vent[1][0], vent[1][1]
+        x1, y1, x2, y2 = vent
         x_range = range(x1, x2 + 1) if x2 > x1 else range(x1, x2 - 1, -1)
         y_range = range(y1, y2 + 1) if y2 > y1 else range(y1, y2 - 1, -1)
         if x1 != x2 and y1 != y2:
